@@ -1,8 +1,16 @@
+import { ObjectID } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupdDetail";
 import { connect } from "../api/new-meetup";
 
-const MeetupDetails = () => {
-  return <MeetupDetail />;
+const MeetupDetails = ({ meetupData }) => {
+  return (
+    <MeetupDetail
+      title={meetupData?.title}
+      image={meetupData?.image}
+      address={meetupData?.address}
+      description={meetupData?.description}
+    />
+  );
 };
 
 export const getStaticPaths = async () => {
@@ -10,6 +18,8 @@ export const getStaticPaths = async () => {
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
   const meetupIds = await meetupsCollection.find({}, { _id: 1 }).toArray();
+
+  client.close();
 
   return {
     fallback: false,
@@ -21,17 +31,24 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const meetupId = context.params.meetupId;
-  console.log(meetupId);
+
+  const client = await connect();
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const selectedMeetup = await meetupsCollection.findOne({
+    _id: ObjectID(meetupId),
+  });
+
+  client.close();
 
   return {
     props: {
       meetupData: {
-        id: meetupId,
-        image:
-          "https://i.natgeofe.com/k/9acd2bad-fb0e-43a8-935d-ec0aefc60c2f/monarch-butterfly-grass_4x3.jpg",
-        title: "A First Meetup",
-        address: "Some Address 5, Some City",
-        description: "The meetup description",
+        title: selectedMeetup.title,
+        image: selectedMeetup.image,
+        address: selectedMeetup.address,
+        description: selectedMeetup.description,
+        id: selectedMeetup._id.toString(),
       },
     },
   };
