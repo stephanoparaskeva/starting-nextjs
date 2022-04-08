@@ -8,10 +8,7 @@ const MeetupDetails = ({ meetupData }) => {
     <>
       <Head>
         <title>{meetupData.title}</title>
-        <meta
-          name="description"
-          content={meetupData.description}
-        />
+        <meta name="description" content={meetupData.description} />
       </Head>
       <MeetupDetail
         title={meetupData?.title}
@@ -32,7 +29,7 @@ export const getStaticPaths = async () => {
   client.close();
 
   return {
-    fallback: 'blocking',
+    fallback: "blocking",
     paths: meetupIds.map(({ _id }) => ({
       params: { meetupId: _id.toString() },
     })),
@@ -61,6 +58,7 @@ export const getStaticProps = async (context) => {
         id: selectedMeetup._id.toString(),
       },
     },
+    revalidate: 1,
   };
 };
 
