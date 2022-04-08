@@ -1,8 +1,17 @@
 import MeetupList from "../components/meetups/MeetupList";
 import { connect } from "./api/new-meetup";
+import Head from "next/head";
 
 const HomePage = ({ meetups }) => {
-  return <MeetupList meetups={meetups} />;
+  return (
+    <>
+      <Head>
+        <title>React Meetups</title>
+        <meta name="description" content="Browse a huge list of highly active React meetups!"/>
+      </Head>
+      <MeetupList meetups={meetups} />
+    </>
+  );
 };
 
 export const getStaticProps = async () => {

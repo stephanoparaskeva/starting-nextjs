@@ -1,15 +1,25 @@
+import Head from "next/head";
 import { ObjectID } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupdDetail";
 import { connect } from "../api/new-meetup";
 
 const MeetupDetails = ({ meetupData }) => {
   return (
-    <MeetupDetail
-      title={meetupData?.title}
-      image={meetupData?.image}
-      address={meetupData?.address}
-      description={meetupData?.description}
-    />
+    <>
+      <Head>
+        <title>{meetupData.title}</title>
+        <meta
+          name="description"
+          content={meetupData.description}
+        />
+      </Head>
+      <MeetupDetail
+        title={meetupData?.title}
+        image={meetupData?.image}
+        address={meetupData?.address}
+        description={meetupData?.description}
+      />
+    </>
   );
 };
 
