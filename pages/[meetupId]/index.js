@@ -1,9 +1,23 @@
 import Head from "next/head";
 import { ObjectID } from "mongodb";
-import MeetupDetail from "../../components/meetups/MeetupdDetail";
+import { useRouter } from "next/router";
+import MeetupDetail from "../../components/meetups/MeetupDetail";
+import MeetupButtons from "../../components/meetups/MeetupButtons";
 import { connect } from "../api/new-meetup";
 
 const MeetupDetails = ({ meetupData }) => {
+  const router = useRouter();
+
+  const deleteMeetupHandler = async () => {
+    const response = await fetch(`/api/deleteMeetup/${meetupData.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    console.log(response)
+    router.push("/");
+  };
+
   return (
     <>
       <Head>
@@ -16,27 +30,12 @@ const MeetupDetails = ({ meetupData }) => {
         address={meetupData?.address}
         description={meetupData?.description}
       />
+      <MeetupButtons deleteHandler={deleteMeetupHandler} />
     </>
   );
 };
 
-export const getStaticPaths = async () => {
-  const client = await connect();
-  const db = client.db();
-  const meetupsCollection = db.collection("meetups");
-  const meetupIds = await meetupsCollection.find({}, { _id: 1 }).toArray();
-
-  client.close();
-
-  return {
-    fallback: "blocking",
-    paths: meetupIds.map(({ _id }) => ({
-      params: { meetupId: _id.toString() },
-    })),
-  };
-};
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const meetupId = context.params.meetupId;
 
   const client = await connect();
@@ -58,7 +57,6 @@ export const getStaticProps = async (context) => {
         id: selectedMeetup._id.toString(),
       },
     },
-    revalidate: 1,
   };
 };
 

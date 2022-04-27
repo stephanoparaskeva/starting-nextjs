@@ -14,7 +14,7 @@ const HomePage = ({ meetups }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const client = await connect();
   const db = client.db();
   const meetupsCollection = db.collection("meetups");

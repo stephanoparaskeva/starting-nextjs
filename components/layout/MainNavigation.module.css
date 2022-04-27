@@ -9,6 +9,7 @@
 }
 
 .logo {
+  cursor: pointer;
   font-size: 2rem;
   color: white;
   font-weight: bold;
