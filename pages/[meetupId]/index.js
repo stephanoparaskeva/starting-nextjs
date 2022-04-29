@@ -11,22 +11,27 @@ import Button from "@mui/material/Button";
 const MeetupDetails = ({ meetupData }) => {
   const router = useRouter();
   const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const deleteMeetupHandler = async () => {
+    setLoading(true);
     await fetch(`/api/deleteMeetup/${meetupData.id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
+    setLoading(false);
 
     router.push("/");
   };
 
   const editMeetupHandler = async (enteredMeetupData) => {
+    setLoading(true);
     await fetch(`/api/editMeetup/${meetupData.id}`, {
       method: "PATCH",
       body: JSON.stringify(enteredMeetupData),
       headers: { "Content-Type": "application/json" },
     });
+    setLoading(false);
 
     router.push("/");
   };
@@ -57,7 +62,7 @@ const MeetupDetails = ({ meetupData }) => {
           imageDefault={meetupData?.image}
           addressDefault={meetupData?.address}
           descriptionDefault={meetupData?.description}
-          formButtonText="Edit Meetup"
+          formButtonText={loading ? "Loading..." : "Edit Meetup"}
           onSubmitForm={editMeetupHandler}
         >
           <button onClick={() => setEditing(false)}>Back</button>
