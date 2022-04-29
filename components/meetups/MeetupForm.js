@@ -34,7 +34,7 @@ function MeetupForm(props) {
           <label htmlFor="title">Meetup Title</label>
           <input
             type="text"
-            value={props.titleInitial}
+            defaultValue={props.titleDefault}
             required
             id="title"
             ref={titleInputRef}
@@ -44,7 +44,7 @@ function MeetupForm(props) {
           <label htmlFor="image">Meetup Image</label>
           <input
             type="url"
-            value={props.imageInitial}
+            defaultValue={props.imageDefault}
             required
             id="image"
             ref={imageInputRef}
@@ -54,7 +54,7 @@ function MeetupForm(props) {
           <label htmlFor="address">Address</label>
           <input
             type="text"
-            value={props.addressInitial}
+            defaultValue={props.addressDefault}
             required
             id="address"
             ref={addressInputRef}
@@ -64,7 +64,7 @@ function MeetupForm(props) {
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
-            value={props.descriptionInitial}
+            defaultValue={props.descriptionDefault}
             required
             rows="5"
             ref={descriptionInputRef}

@@ -13,12 +13,21 @@ const MeetupDetails = ({ meetupData }) => {
   const [editing, setEditing] = useState(false);
 
   const deleteMeetupHandler = async () => {
-    const response = await fetch(`/api/deleteMeetup/${meetupData.id}`, {
+    await fetch(`/api/deleteMeetup/${meetupData.id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
 
-    console.log(response);
+    router.push("/");
+  };
+
+  const editMeetupHandler = async (enteredMeetupData) => {
+    await fetch(`/api/editMeetup/${meetupData.id}`, {
+      method: "PATCH",
+      body: JSON.stringify(enteredMeetupData),
+      headers: { "Content-Type": "application/json" },
+    });
+
     router.push("/");
   };
 
@@ -44,11 +53,12 @@ const MeetupDetails = ({ meetupData }) => {
         </>
       ) : (
         <MeetupForm
-          titleInitial={meetupData?.title}
-          imageInitial={meetupData?.image}
-          addressInitial={meetupData?.address}
-          descriptionInitial={meetupData?.description}
+          titleDefault={meetupData?.title}
+          imageDefault={meetupData?.image}
+          addressDefault={meetupData?.address}
+          descriptionDefault={meetupData?.description}
           formButtonText="Edit Meetup"
+          onSubmitForm={editMeetupHandler}
         >
           <button onClick={() => setEditing(false)}>Back</button>
         </MeetupForm>
