@@ -51,6 +51,7 @@ const MeetupDetails = ({ meetupData }) => {
             description={meetupData?.description}
           />
           <MeetupButtons
+            loading={loading}
             editing={editing}
             setEditing={setEditing}
             deleteHandler={deleteMeetupHandler}

@@ -1,16 +1,8 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Card from "../ui/Card";
 import classes from "./MeetupItem.module.css";
 
 function MeetupItem(props) {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
-  router.events?.on("routeChangeStart", () => setLoading(true));
-  router.events?.on("routeChangeComplete", () => setLoading(false));
-
   return (
     <li className={classes.item}>
       <Card>
@@ -23,7 +15,7 @@ function MeetupItem(props) {
         </div>
         <div className={classes.actions}>
           <Link href={`/${props.id}`}>
-            <button>{loading ? "Loading..." : "Show Details"}</button>
+            <button>Show Details</button>
           </Link>
         </div>
       </Card>
