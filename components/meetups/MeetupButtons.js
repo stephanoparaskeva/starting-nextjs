@@ -1,24 +1,13 @@
 import Button from "@mui/material/Button";
 import classes from "./MeetupButtons.module.css";
 
-const MeetupButtons = ({ deleteHandler, editHandler }) => {
+const MeetupButtons = ({ editing, setEditing, deleteHandler }) => {
   return (
-    <div className={classes.buttonsContainer}>
-      <Button
-        onClick={deleteHandler}
-        className={classes.deleteButton}
-        color="error"
-        variant="contained"
-      >
-        Delete
-      </Button>
-      <Button
-        onClick={editHandler}
-        className={classes.editButton}
-        variant="contained"
-      >
+    <div className={classes.actions}>
+      <button onClick={deleteHandler}>Delete</button>
+      <button className={classes.edit} onClick={() => setEditing(!editing)}>
         Edit
-      </Button>
+      </button>
     </div>
   );
 };

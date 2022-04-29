@@ -1,12 +1,16 @@
 import Head from "next/head";
+import { useState } from "react";
 import { ObjectID } from "mongodb";
 import { useRouter } from "next/router";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 import MeetupButtons from "../../components/meetups/MeetupButtons";
 import { connect } from "../api/new-meetup";
+import MeetupForm from "../../components/meetups/MeetupForm";
+import Button from "@mui/material/Button";
 
 const MeetupDetails = ({ meetupData }) => {
   const router = useRouter();
+  const [editing, setEditing] = useState(false);
 
   const deleteMeetupHandler = async () => {
     const response = await fetch(`/api/deleteMeetup/${meetupData.id}`, {
@@ -14,7 +18,7 @@ const MeetupDetails = ({ meetupData }) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    console.log(response)
+    console.log(response);
     router.push("/");
   };
 
@@ -24,13 +28,31 @@ const MeetupDetails = ({ meetupData }) => {
         <title>{meetupData.title}</title>
         <meta name="description" content={meetupData.description} />
       </Head>
-      <MeetupDetail
-        title={meetupData?.title}
-        image={meetupData?.image}
-        address={meetupData?.address}
-        description={meetupData?.description}
-      />
-      <MeetupButtons deleteHandler={deleteMeetupHandler} />
+      {!editing ? (
+        <>
+          <MeetupDetail
+            title={meetupData?.title}
+            image={meetupData?.image}
+            address={meetupData?.address}
+            description={meetupData?.description}
+          />
+          <MeetupButtons
+            editing={editing}
+            setEditing={setEditing}
+            deleteHandler={deleteMeetupHandler}
+          />
+        </>
+      ) : (
+        <MeetupForm
+          titleInitial={meetupData?.title}
+          imageInitial={meetupData?.image}
+          addressInitial={meetupData?.address}
+          descriptionInitial={meetupData?.description}
+          formButtonText="Edit Meetup"
+        >
+          <button onClick={() => setEditing(false)}>Back</button>
+        </MeetupForm>
+      )}
     </>
   );
 };
