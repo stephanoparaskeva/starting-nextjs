@@ -8,6 +8,7 @@ const HomePage = ({ meetups }) => {
       <Head>
         <title>React Meetups</title>
         <meta name="description" content="Browse a huge list of highly active React meetups!"/>
+        <script src="https://kit.fontawesome.com/1ae37fca73.js" crossorigin="anonymous"></script>
       </Head>
       <MeetupList meetups={meetups} />
     </>

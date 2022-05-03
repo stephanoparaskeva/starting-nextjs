@@ -7,16 +7,11 @@ function MainNavigation() {
       <Link href="/">
         <div className={classes.logo}>React Meetups</div>
       </Link>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/">All Meetups</Link>
-          </li>
-          <li>
-            <Link href="/new-meetup">Add New Meetup</Link>
-          </li>
-        </ul>
-      </nav>
+      <Link href="/new-meetup">
+        <div className={classes.faPlusContainer}>
+          <i className="fa-solid fa-plus"></i>
+        </div>
+      </Link>
     </header>
   );
 }

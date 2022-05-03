@@ -15,17 +15,9 @@
   font-weight: bold;
 }
 
-.header ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.header li {
-  margin-left: 3rem;
+.faPlusContainer {
+  color: white;
+  font-size: 30px;
 }
 
 .header a {
