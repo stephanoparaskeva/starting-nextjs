@@ -3,3 +3,11 @@
   width: 90%;
   max-width: 40rem;
 }
+
+.circularProgress {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

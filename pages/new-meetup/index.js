@@ -14,10 +14,8 @@ const NewMeetupPage = () => {
       body: JSON.stringify(enteredMeetupData),
       headers: { "Content-Type": "application/json" },
     });
-
-    setLoading(false);
-
     router.push("/");
+    setLoading(false);
   };
 
   return (

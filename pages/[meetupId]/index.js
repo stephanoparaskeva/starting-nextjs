@@ -19,9 +19,8 @@ const MeetupDetails = ({ meetupData }) => {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
-    setLoading(false);
-
     router.push("/");
+    setLoading(false);
   };
 
   const editMeetupHandler = async (enteredMeetupData) => {
@@ -31,9 +30,8 @@ const MeetupDetails = ({ meetupData }) => {
       body: JSON.stringify(enteredMeetupData),
       headers: { "Content-Type": "application/json" },
     });
-    setLoading(false);
-
     router.push("/");
+    setLoading(false);
   };
 
   return (

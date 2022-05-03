@@ -4,10 +4,3 @@
   padding: 0;
 }
 
-.circularProgress {
-  height: 80vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
