@@ -30,3 +30,13 @@
   color: #120078;
   border: 1px solid #120078;
 }
+
+.actions .back {
+  color: #47464a;
+  border: 1px solid #47464a;
+}
+
+.actions .back:hover,
+.actions .back:active {
+  background-color: #dedede;
+}

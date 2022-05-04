@@ -11,7 +11,7 @@ function MainNavigation() {
       <Link href="/new-meetup">
         <div className={classes.addMeetupContainer}>
           <div className={classes.addMeetupText}>Add Meetup</div>{" "}
-          <Image width={25} height={25} src={"/plus.svg"} />
+          <Image width={25} height={25} src="/plus.svg" />
         </div>
       </Link>
     </header>
