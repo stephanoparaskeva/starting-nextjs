@@ -15,9 +15,16 @@
   font-weight: bold;
 }
 
-.faPlusContainer {
+.addMeetupContainer {
+  cursor: pointer;
   color: white;
   font-size: 30px;
+}
+
+.addMeetupText {
+  margin-right: 5px;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .header a {
@@ -38,5 +45,8 @@
   }
   .header a {
     font-size: 20px;
+  }
+  .addMeetupText {
+    display: none;
   }
 }
