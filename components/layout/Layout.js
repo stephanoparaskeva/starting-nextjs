@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import MainNavigation from "./MainNavigation";
 import classes from "./Layout.module.css";
@@ -8,8 +8,17 @@ function Layout(props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  router.events?.on("routeChangeStart", () => setLoading(true));
-  router.events?.on("routeChangeComplete", () => setLoading(false));
+  router.events?.on("routeChangeStart", () => {
+    setLoading(true);
+  });
+  router.events?.on("routeChangeComplete", (url) => {
+    setLoading(false);
+
+    const jwt = global?.window?.localStorage.getItem("jwt");
+
+    if (url.match(/login/)) return;
+    if (!jwt) router.push("/login");
+  });
 
   return (
     <div>

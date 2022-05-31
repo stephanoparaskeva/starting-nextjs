@@ -1,0 +1,6 @@
+.addMeetupContainer {
+  position: fixed;
+  bottom: 25px;
+  right: 66px;
+  cursor: pointer;
+}

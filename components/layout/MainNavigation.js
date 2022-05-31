@@ -1,19 +1,33 @@
 import Link from "next/link";
 import classes from "./MainNavigation.module.css";
-import Image from "next/image";
+import { useRouter } from "next/router";
 
 function MainNavigation() {
+  const router = useRouter();
+  const jwt = global?.window?.localStorage.getItem("jwt");
+
+  const logoutHandler = async () => {
+    await global?.window?.localStorage.removeItem("jwt");
+    router.push("/");
+  };
+
   return (
     <header className={classes.header}>
       <Link href="/">
         <div className={classes.logo}>React Meetups</div>
       </Link>
-      <Link href="/new-meetup">
-        <div className={classes.addMeetupContainer}>
-          <div className={classes.addMeetupText}>Add Meetup</div>{" "}
-          <Image width={25} height={25} src="/plus.svg" />
+      {jwt && (
+        <div className={classes.headerOptions}>
+          <Link href="/new-meetup">
+            <div className={classes.addMeetupContainer}>
+              <div className={classes.addMeetupText}>Add Meetup</div>{" "}
+            </div>
+          </Link>
+          <div onClick={logoutHandler} className={classes.logoutText}>
+            Logout
+          </div>
         </div>
-      </Link>
+      )}
     </header>
   );
 }

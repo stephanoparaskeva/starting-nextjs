@@ -15,7 +15,18 @@
   font-weight: bold;
 }
 
+.headerOptions {
+  display: flex;
+}
+
 .addMeetupContainer {
+  margin-right: 20px;
+  cursor: pointer;
+  color: white;
+  font-size: 30px;
+}
+
+.logoutText {
   cursor: pointer;
   color: white;
   font-size: 30px;
