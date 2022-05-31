@@ -8,16 +8,22 @@ function Layout(props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
+  const getJwt = () => global?.window?.localStorage.getItem("jwt");
+
+  useEffect(()=> {
+    if (!getJwt()) {
+      router.push("/login");
+    }
+  }, [])
+
   router.events?.on("routeChangeStart", () => {
     setLoading(true);
   });
   router.events?.on("routeChangeComplete", (url) => {
     setLoading(false);
 
-    const jwt = global?.window?.localStorage.getItem("jwt");
-
     if (url.match(/login/)) return;
-    if (!jwt) router.push("/login");
+    if (!getJwt()) router.push("/login");
   });
 
   return (
