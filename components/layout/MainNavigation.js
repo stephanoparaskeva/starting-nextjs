@@ -16,16 +16,23 @@ function MainNavigation() {
       <Link href="/">
         <div className={classes.logo}>React Meetups</div>
       </Link>
-      {jwt && (
+      {jwt ? (
         <div className={classes.headerOptions}>
           <Link href="/new-meetup">
-            <div className={classes.addMeetupContainer}>
-              <div className={classes.addMeetupText}>Add Meetup</div>{" "}
-            </div>
+            <div className={classes.headerText}>Add Meetup</div>
           </Link>
-          <div onClick={logoutHandler} className={classes.logoutText}>
+          <div onClick={logoutHandler} className={classes.headerText}>
             Logout
           </div>
+        </div>
+      ) : (
+        <div className={classes.headerOptions}>
+          <Link href="/login/signin">
+            <div className={classes.headerText}>Sign In</div>
+          </Link>
+          <Link href="/login/signup">
+            <div className={classes.headerText}>Sign Up</div>
+          </Link>
         </div>
       )}
     </header>

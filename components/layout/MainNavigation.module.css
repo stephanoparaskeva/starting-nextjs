@@ -16,17 +16,12 @@
 }
 
 .headerOptions {
+  width: 30%;
   display: flex;
+  justify-content: space-around;
 }
 
-.addMeetupContainer {
-  margin-right: 20px;
-  cursor: pointer;
-  color: white;
-  font-size: 30px;
-}
-
-.logoutText {
+.headerText {
   cursor: pointer;
   color: white;
   font-size: 30px;

@@ -1,15 +1,11 @@
 import Link from "next/link";
 import classes from "./login.module.css";
+import Image from "next/image";
 
 const Login = () => {
   return (
-    <div className={classes.loginActions}>
-      <Link href="/login/signin">
-        <button>Sign In</button>
-      </Link>
-      <Link href="/login/signup">
-        <button>Sign Up</button>
-      </Link>
+    <div className={classes.loginContainer}>
+      <img className={classes.loginImage} src="/language-meetup.jpg" />
     </div>
   );
 };
